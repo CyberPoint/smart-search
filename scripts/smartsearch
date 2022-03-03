@@ -141,8 +141,11 @@ if __name__ == "__main__":
     if not os.path.exists( arguments.words ):
         list_of_words = arguments.words.split(",")
     else:
+        arguments.words = os.path.abspath(arguments.words)
         with open( arguments.words, 'r' ) as reader:
+            logger.info( 'read list of words from {}'.format(arguments.words) )
             list_of_words = reader.readlines( ) 
+            list_of_words = map(lambda s: s.strip(), list_of_words)
     matches = []
 
     if not arguments.target:
